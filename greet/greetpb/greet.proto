@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package greet;
+package greetpb;
 option go_package="greetpb";
 
 
@@ -19,7 +19,16 @@ message GreetResponse{
     string result = 1;
 }
 
+message GreetManyTimesRequest{
+    string greeting = 1;
+}
+
+message GreetManyTimesResponse{
+    string result = 1;
+}
+
 service GreetService{
     // Unary
    rpc Greet(GreetRequest) returns (GreetResponse) {};
+   rpc GreetManyTimes(GreetManyTimesRequest) returns (stream GreetManyTimesResponse) {};
 }

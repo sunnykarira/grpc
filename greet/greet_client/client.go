@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"io"
 	"log"
 
 	"github.com/grpc/greet/greetpb"
@@ -20,7 +21,30 @@ func main() {
 	defer conn.Close()
 	c := greetpb.NewGreetServiceClient(conn)
 
-	doUnary(c)
+	//doUnary(c)
+	doServerStreaming(c)
+
+}
+
+func doServerStreaming(c greetpb.GreetServiceClient) {
+	fmt.Println("starting to do server stream rpc")
+	req := &greetpb.GreetManyTimesRequest{
+		Greeting: "Sunny",
+	}
+	resStream, err := c.GreetManyTimes(context.Background(), req)
+	if err != nil {
+		log.Fatalf("err while calling greet many times rpc %v", err)
+	}
+	for {
+		msg, err := resStream.Recv()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			log.Fatalf("err while reading the stream %v", err)
+		}
+		log.Printf("Response from Greet Many Times %v", msg.GetResult())
+	}
 
 }
 
