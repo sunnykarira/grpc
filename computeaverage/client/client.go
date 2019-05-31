@@ -59,5 +59,5 @@ func doClientStreaming(c computeaverage.ComputeAverageClient) {
 		log.Fatalf("error while recieving response from long greet rpc %v", err)
 	}
 
-	log.Printf("long greet reponse %v\n", res)
+	log.Printf("long greet reponse %v\n", res.GetResponse())
 }
