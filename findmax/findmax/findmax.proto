@@ -1,0 +1,18 @@
+syntax="proto3";
+
+package findmax;
+option go_package="findmax";
+
+
+message FindMaxRequest{
+    int64 number = 1;
+}
+
+message FindMaxResponse{
+    int64 maximumNumber = 1 ;
+}
+
+service FindMax{
+    // Bi di streaming
+    rpc FindMax(stream FindMaxRequest) returns (stream FindMaxResponse) {};
+}
