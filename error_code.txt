@@ -1,0 +1,17 @@
+In HTTP there are many error codes
+- 2XX 
+- 3xx
+- 4xx
+- 5xx
+
+
+In grpc there are few standardized error codes
+https://grpc.io/docs/guides/error/
+
+
+avi.im/grpc-errors
+
+
+For extra information in error we can use the metadata context.
+
+

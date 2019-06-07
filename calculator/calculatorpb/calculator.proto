@@ -14,7 +14,20 @@ message CalculatorResponse{
     int64 calculatedValue = 1;
 }
 
+message SquareRootRequest{
+    int64 number = 1;
+}
+
+message SquareRootResponse{
+    float root = 1 ;
+}
+
 
 service Calculator{
     rpc Sum(CalculatorRequest) returns (CalculatorResponse) {};
+
+    // error handling
+    // this RPC will throw an exception if the sent number is negative
+    // The error being sent is of type invalid arguemnt
+    rpc Squareroot(SquareRootRequest) returns (SquareRootResponse) {};
 }

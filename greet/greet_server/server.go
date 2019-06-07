@@ -9,6 +9,9 @@ import (
 	"strconv"
 	"time"
 
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
+
 	"github.com/grpc/greet/greetpb"
 	"google.golang.org/grpc"
 )
@@ -85,6 +88,25 @@ func (s *server) GreetEveryOne(stream greetpb.GreetService_GreetEveryOneServer) 
 			return err
 		}
 	}
+}
+
+func (s *server) GreetWithDeadLine(ctx context.Context, req *greetpb.GreetWithDeadLineRequest) (*greetpb.GreetWithDeadLineResponse, error) {
+	fmt.Printf("GreetWithDeadLine function was invoked %v", req)
+
+	for i := 0; i < 3; i++ {
+		if ctx.Err() == context.Canceled {
+			// Client cancelled the request
+			fmt.Println("client cancelled the request")
+			return nil, status.Error(codes.DeadlineExceeded, "the client cancelled the request ")
+
+		}
+		time.Sleep(1 * time.Second)
+	}
+
+	result := "Hello " + req.GetGreeting()
+	return &greetpb.GreetWithDeadLineResponse{
+		Result: result,
+	}, nil
 }
 
 func main() {

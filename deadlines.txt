@@ -1,0 +1,9 @@
+Deadlines allows grpc clients to specify how long they are willing
+to wait for an RPC to complete before the RPC it terminated with the
+error DEADLINE_EXCEEDED
+
+https://grpc.io/blog/deadlines
+
+NOTE: Deadlines are propogated across if gRPC calls are chained.
+
+A => B => C (C will be aware of deadlines)
