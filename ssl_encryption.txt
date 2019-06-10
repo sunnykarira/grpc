@@ -1,0 +1,26 @@
+In production all the calls should be running with ssl encryption enabled.
+This is done by generating SSL certificates.
+SSL allows the communication to be secure end to end ensuing no Man in the middle attack
+can be performed.
+
+How SSL works?
+
+
+Why do we need encryption?
+When you communicate over the internet , your data is visible by all the servers
+that transfer your packet.
+It means any router on the internet can access the password which is bad and hence
+we do not login to the website using http.
+
+SSL allows client and server to encrypt packets.
+
+gRPC server and client decrypts 
+Router cannot view the contents of internet packets
+
+
+TLS (Transport layer security), successor of SSL, encrypts the connection between 
+two endpoints for secure exchange of data.
+
+
+
+See Hands on SSL on reilly (gRPC)
