@@ -1,0 +1,13 @@
+Both client and server needs the proto files
+And sometimes client does not know about what reponses a server could have
+
+So, `What API's do you have?` this is the question sometimes
+
+
+Enters GRPC Reflection
+
+
+Why?
+
+We need server to expose which enpoints are available
+Allow CLI to interact with server without have a prelimnary `.proto` file
